@@ -11,10 +11,6 @@ import { clearState } from '../redux/slices'
 import { useNavigate } from 'react-router-dom'
 import { getCorrectAnswerCount } from '../utils/features'
 
-const result = ['a', 'b', 'c']
-
-const words = [{ meaning: 'asdaf' }, { meaning: 'dafs' }]
-
 const Result = () => {
   const { words, result } = useSelector((state: State) => state)
   const dispatch = useDispatch()
@@ -68,7 +64,12 @@ const Result = () => {
         {percentage > 50 ? 'Pass' : 'Fail'}
       </Typography>
 
-      <Button variant="contained" fullWidth onClick={resetHandler}>
+      <Button
+        variant="contained"
+        fullWidth
+        onClick={resetHandler}
+        sx={{ textTransform: 'capitalize' }}
+      >
         Reset
       </Button>
     </Container>

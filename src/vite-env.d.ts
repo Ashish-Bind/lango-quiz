@@ -2,10 +2,10 @@
 
 interface Language {
   name: string
-  code: string
+  code: Code
 }
 
-type Code = 'en' | 'hi' | 'es' | 'ja'
+type Code = 'fr' | 'hi' | 'es' | 'ja'
 
 type Word = {
   word: string

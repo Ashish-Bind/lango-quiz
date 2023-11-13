@@ -1,5 +1,8 @@
 import { Button, Container, Stack, Typography } from '@mui/material'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { clearState } from '../redux/slices'
 
 const languages: Language[] = [
   { name: 'Hindi', code: 'hi' },
@@ -10,9 +13,14 @@ const languages: Language[] = [
 
 const Home = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const selectLanguageHandler = (languageCode: string): void => {
     navigate(`/learn?code=${languageCode}`)
   }
+
+  useEffect(() => {
+    dispatch(clearState())
+  }, [])
 
   return (
     <Container>
