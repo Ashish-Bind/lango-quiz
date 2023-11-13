@@ -33,7 +33,7 @@ export const translateWord = async (languageCode: string): Promise<Word[]> => {
     },
     headers: {
       'content-type': 'application/json',
-      'X-RapidAPI-Key': '83f44e0e5bmshb757be853ede9f4p1775bajsn96e76ef60f7a',
+      'X-RapidAPI-Key': import.meta.env.VITE_RAPID_API_KEY,
       'X-RapidAPI-Host': 'microsoft-translator-text.p.rapidapi.com',
     },
     data: words,
@@ -66,4 +66,59 @@ export const getCorrectAnswerCount = (arr1: string[], arr2: Word[]): number => {
   })
 
   return count
+}
+
+export const textToSpeech = async (
+  text: string,
+  languageCode: Code
+): Promise<string> => {
+  const encodedParams = new URLSearchParams({
+    src: text,
+    r: '0',
+    c: 'mp3',
+    b64: 'true',
+    f: '8khz_8bit_mono',
+  })
+
+  switch (languageCode) {
+    case 'es':
+      encodedParams.set('hl', 'es-es')
+      break
+
+    case 'fr':
+      encodedParams.set('hl', 'fr-ch')
+      break
+
+    case 'hi':
+      encodedParams.set('hl', 'hi-in')
+      break
+
+    case 'ja':
+      encodedParams.set('hl', 'ja-jp')
+      break
+  }
+
+  const url = 'https://voicerss-text-to-speech.p.rapidapi.com/'
+
+  const options = {
+    params: {
+      key: import.meta.env.VITE_TEXT_TO_SPEECH_API,
+    },
+    headers: {
+      'content-type': 'application/x-www-form-urlencoded',
+      'X-RapidAPI-Key': import.meta.env.VITE_RAPID_API_KEY,
+      'X-RapidAPI-Host': 'voicerss-text-to-speech.p.rapidapi.com',
+    },
+  }
+
+  try {
+    const { data }: { data: string } = await axios.post(
+      url,
+      encodedParams,
+      options
+    )
+    return data
+  } catch (error) {
+    throw new Error('Text to speech not working')
+  }
 }

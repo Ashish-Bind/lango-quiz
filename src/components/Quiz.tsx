@@ -58,6 +58,7 @@ const Quiz = () => {
         fullWidth
         onClick={nextHandler}
         disabled={answer === ''}
+        sx={{ textTransform: 'capitalize' }}
       >
         {count === words.length ? 'Submit' : 'Next'}
       </Button>
