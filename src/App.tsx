@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import { lazy, Suspense } from 'react'
+import { CircularProgress } from '@mui/material'
 import Loader from './components/Loader'
 
 const Home = lazy(() => import('./components/Home'))
